@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam Boumbar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #fafaf8;
+    --gray-100: #f5f5f3;
+    --gray-200: #e8e8e5;
+    --gray-400: #a0a09b;
+    --gray-600: #6b6b66;
+    --gray-800: #2d2d2a;
+    --rule: #d4d4cf;
+    --font-display: 'DM Serif Display', 'Georgia', serif;
+    --font-body: 'Source Serif 4', 'Georgia', serif;
+    --font-label: 'Libre Baskerville', 'Georgia', serif;
+    --max-width: 1120px;
+    --gutter: 2.5rem;
+  }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  ::selection { background: var(--black); color: var(--white); }
+
+  .page { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+
+  /* ═══ MASTHEAD ═══ */
+  .masthead { padding: 3.5rem 0 0; text-align: center; cursor: pointer; }
+  .masthead::after { content: ''; display: block; width: 100%; height: 1px; background: var(--black); margin-top: 2rem; }
+  .masthead__name { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 6vw, 4.5rem); letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.1; color: var(--black); }
+  .masthead__rule-thin { width: 60px; height: 1px; background: var(--gray-400); margin: 1rem auto 0.8rem; }
+  .masthead__tagline { font-family: var(--font-body); font-style: italic; font-weight: 400; font-size: 1.1rem; color: var(--gray-600); letter-spacing: 0.04em; }
+
+  /* ═══ MAIN GRID ═══ */
+  .main-grid { display: grid; grid-template-columns: 260px 1px 1fr; gap: 0; padding-top: 2.5rem; min-height: 65vh; }
+  .sidebar { padding-right: 2.5rem; padding-top: 0.5rem; }
+  .main-grid__divider { background: var(--rule); width: 1px; }
+  .content { padding-left: 3rem; padding-top: 0.5rem; padding-bottom: 4rem; }
+
+  /* ═══ SIDEBAR ═══ */
+  .sidebar__section-title { font-family: var(--font-label); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 1.2rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--gray-200); }
+  .sidebar__nav { list-style: none; margin-bottom: 2.5rem; }
+  .sidebar__nav li { margin-bottom: 0.15rem; }
+  .sidebar__nav a { font-family: var(--font-body); font-size: 1.05rem; font-weight: 500; color: var(--gray-600); text-decoration: none; display: flex; align-items: center; padding: 0.45rem 0; transition: all 0.25s ease; cursor: pointer; }
+  .sidebar__nav a .nav-number { font-family: var(--font-display); font-size: 0.7rem; color: var(--gray-400); width: 24px; margin-right: 0.6rem; transition: color 0.25s ease; }
+  .sidebar__nav a:hover { color: var(--black); }
+  .sidebar__nav a:hover .nav-number { color: var(--black); }
+  .sidebar__nav a.active { color: var(--black); font-weight: 600; }
+  .sidebar__nav a.active .nav-number { color: var(--black); }
+
+  .sidebar__subnav { list-style: none; margin: 0.2rem 0 0.3rem 2.2rem; max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease; opacity: 0; }
+  .sidebar__subnav.open { max-height: 300px; opacity: 1; }
+  .sidebar__subnav a { font-size: 0.92rem; font-weight: 400; padding: 0.3rem 0; color: var(--gray-600); }
+  .sidebar__subnav a:hover { color: var(--black); }
+  .sidebar__subnav a.active { color: var(--black); font-weight: 600; }
+
+  .sidebar__contact { margin-top: 2rem; }
+  .sidebar__contact-item { font-family: var(--font-body); font-size: 0.9rem; color: var(--gray-600); margin-bottom: 0.4rem; display: flex; align-items: baseline; gap: 0.5rem; }
+  .sidebar__contact-item .label { font-family: var(--font-label); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-400); min-width: 50px; }
+  .sidebar__contact-item a { color: var(--gray-600); text-decoration: none; border-bottom: 1px solid transparent; transition: all 0.25s ease; }
+  .sidebar__contact-item a:hover { color: var(--black); border-bottom-color: var(--black); }
+
+  /* ═══ CONTENT PAGES ═══ */
+  .page-view { display: none; }
+  .page-view.active { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section__header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.8rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--black); }
+  .section__number { font-family: var(--font-display); font-size: 0.85rem; color: var(--gray-400); }
+  .section__title { font-family: var(--font-display); font-weight: 400; font-size: 1.6rem; letter-spacing: 0.06em; color: var(--black); }
+
+  .section__body { font-family: var(--font-body); font-size: 1.05rem; line-height: 1.8; color: var(--gray-800); text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+  .section__body p { margin-bottom: 1.2rem; }
+  .section__body p:last-child { margin-bottom: 0; }
+
+  .drop-cap::first-letter { font-family: var(--font-display); float: left; font-size: 3.5rem; line-height: 0.82; padding-right: 0.1em; padding-top: 0.06em; color: var(--black); font-weight: 400; }
+
+  /* ═══ DOWNLOAD BUTTON ═══ */
+  .download-block { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--gray-200); display: flex; align-items: center; gap: 1.5rem; }
+  .download-btn { display: inline-flex; align-items: center; gap: 0.7rem; font-family: var(--font-label); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--black); text-decoration: none; padding: 0.85rem 1.8rem; border: 1px solid var(--black); background: transparent; cursor: pointer; transition: all 0.3s ease; }
+  .download-btn:hover { background: var(--black); color: var(--white); }
+  .download-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .download-meta { font-family: var(--font-body); font-style: italic; font-size: 0.9rem; color: var(--gray-400); }
+
+  /* ═══ PROJECT LIST ═══ */
+  .project-list-item { display: flex; align-items: baseline; justify-content: space-between; padding: 1.3rem 0; border-bottom: 1px solid var(--gray-200); cursor: pointer; transition: all 0.25s ease; gap: 1rem; }
+  .project-list-item:hover { padding-left: 0.8rem; }
+  .project-list-item:hover .pli-title { color: var(--black); }
+  .project-list-item:hover .pli-arrow { color: var(--black); transform: translateX(4px); }
+  .pli-left { display: flex; align-items: baseline; gap: 1.2rem; flex: 1; }
+  .pli-num { font-family: var(--font-display); font-size: 0.75rem; color: var(--gray-400); min-width: 20px; }
+  .pli-title { font-family: var(--font-body); font-weight: 600; font-size: 1.1rem; color: var(--gray-800); transition: color 0.25s ease; }
+  .pli-cat { font-family: var(--font-label); font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-400); white-space: nowrap; }
+  .pli-arrow { font-family: var(--font-display); font-size: 1.1rem; color: var(--gray-400); transition: all 0.25s ease; }
+
+  /* ═══ BACK LINK ═══ */
+  .back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-label); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-400); text-decoration: none; cursor: pointer; margin-bottom: 2rem; transition: color 0.25s ease; }
+  .back-link:hover { color: var(--black); }
+  .back-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+  /* ═══ FOOTER ═══ */
+  .footer { border-top: 1px solid var(--black); padding: 1.5rem 0 2rem; margin-top: 4rem; display: flex; justify-content: space-between; align-items: center; }
+  .footer__left { font-family: var(--font-body); font-style: italic; font-size: 0.9rem; color: var(--gray-600); }
+  .footer__right { font-family: var(--font-label); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-400); }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 860px) {
+    .main-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .main-grid__divider { display: none; }
+    .sidebar { padding-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 2rem; }
+    .content { padding-left: 0; }
+  }
+  @media (max-width: 520px) {
+    :root { --gutter: 1.2rem; }
+    .masthead__name { letter-spacing: 0.06em; }
+    .pli-cat { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- MASTHEAD -->
+  <header class="masthead" onclick="navigate('apropos')">
+    <h1 class="masthead__name">Adam Boumbar</h1>
+    <div class="masthead__rule-thin"></div>
+    <p class="masthead__tagline">Finance &amp; Marchés · Dauphine PSL</p>
+  </header>
+
+  <!-- MAIN GRID -->
+  <div class="main-grid">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <p class="sidebar__section-title">Pages</p>
+      <ul class="sidebar__nav">
+        <li><a onclick="navigate('apropos')" data-page="apropos" class="active"><span class="nav-number">01</span>À propos</a></li>
+        <li><a onclick="navigate('cv')" data-page="cv"><span class="nav-number">02</span>Curriculum Vitæ</a></li>
+        <li>
+          <a onclick="navigate('projets')" data-page="projets"><span class="nav-number">03</span>Projets</a>
+          <ul class="sidebar__subnav" id="subnav-projets">
+            <li><a onclick="navigate('projet-gold')" data-page="projet-gold">Déterminants de l'or</a></li>
+            <li><a onclick="navigate('projet-scanner')" data-page="projet-scanner">Gold Scanner</a></li>
+            <li><a onclick="navigate('projet-pine')" data-page="projet-pine">Pine Script FVG/ICT</a></li>
+            <li><a onclick="navigate('projet-socio')" data-page="projet-socio">Enquête sociologique</a></li>
+          </ul>
+        </li>
+        <li><a onclick="navigate('journal')" data-page="journal"><span class="nav-number">04</span>Journal de Trading</a></li>
+        <li><a onclick="navigate('contact')" data-page="contact"><span class="nav-number">05</span>Contact</a></li>
+      </ul>
+
+      <p class="sidebar__section-title">Informations</p>
+      <div class="sidebar__contact">
+        <div class="sidebar__contact-item"><span class="label">Lieu</span><span>Paris, France</span></div>
+        <div class="sidebar__contact-item"><span class="label">École</span><span>Dauphine PSL</span></div>
+        <div class="sidebar__contact-item"><span class="label">Mail</span><a href="mailto:adam.boumbar@dauphine.eu">adam.boumbar@dauphine.eu</a></div>
+        <div class="sidebar__contact-item"><span class="label">Profil</span><a href="#">LinkedIn</a></div>
+      </div>
+    </aside>
+
+    <div class="main-grid__divider"></div>
+
+    <!-- ═══ CONTENT ═══ -->
+    <main class="content">
+
+      <!-- À PROPOS (landing) -->
+      <div class="page-view active" id="view-apropos">
+        <div class="section__header">
+          <span class="section__number">I</span>
+          <h2 class="section__title">À propos</h2>
+        </div>
+        <div class="section__body">
+          <p class="drop-cap">Étudiant en troisième année d'Économie Appliquée à l'Université Paris-Dauphine PSL, parcours LISS. Issu d'une classe préparatoire B/L au Lycée Jacques Amyot, je conjugue une formation rigoureuse en sciences sociales quantitatives avec un intérêt marqué pour les marchés financiers et l'analyse économique.</p>
+          <p>Mon parcours se distingue par une approche résolument empirique. Du développement d'outils quantitatifs en Python à l'étude économétrique des déterminants du prix de l'or, je cherche à articuler la rigueur académique avec la compréhension concrète des dynamiques de marché.</p>
+          <p>Ce site réunit mes travaux, projets de recherche et mon journal de trading. Chaque document est consultable et téléchargeable au format PDF depuis les pages dédiées.</p>
+        </div>
+      </div>
+
+      <!-- CV -->
+      <div class="page-view" id="view-cv">
+        <div class="section__header">
+          <span class="section__number">II</span>
+          <h2 class="section__title">Curriculum Vitæ</h2>
+        </div>
+        <div class="section__body">
+          <p>Mon parcours académique articule les sciences sociales quantitatives et l'économie appliquée. Formé en classe préparatoire B/L puis à Paris-Dauphine PSL, je dispose d'une solide base en mathématiques, économétrie et analyse financière, accompagnée d'une expérience internationale aux États-Unis et d'engagements entrepreneuriaux récompensés.</p>
+          <p>Le curriculum vitæ complet est disponible en téléchargement ci-dessous.</p>
+        </div>
+        <div class="download-block">
+          <a href="docs/CV_ADAMBOUMBAR.pdf" download class="download-btn"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Télécharger le CV</a>
+          <span class="download-meta">PDF — 1 page</span>
+        </div>
+      </div>
+
+      <!-- PROJETS (index) -->
+      <div class="page-view" id="view-projets">
+        <div class="section__header">
+          <span class="section__number">III</span>
+          <h2 class="section__title">Projets</h2>
+        </div>
+        <div class="section__body" style="margin-bottom:2rem;">
+          <p>Sélection de travaux de recherche et projets techniques. Chaque projet est accompagné d'une présentation et du document complet téléchargeable au format PDF.</p>
+        </div>
+        <div class="project-list-item" onclick="navigate('projet-gold')">
+          <div class="pli-left"><span class="pli-num">01</span><span class="pli-title">Déterminants du prix de l'or — Étude économétrique</span></div>
+          <span class="pli-cat">Recherche quantitative</span><span class="pli-arrow">→</span>
+        </div>
+        <div class="project-list-item" onclick="navigate('projet-scanner')">
+          <div class="pli-left"><span class="pli-num">02</span><span class="pli-title">Gold Scanner — Outil d'analyse technique Python</span></div>
+          <span class="pli-cat">Développement</span><span class="pli-arrow">→</span>
+        </div>
+        <div class="project-list-item" onclick="navigate('projet-pine')">
+          <div class="pli-left"><span class="pli-num">03</span><span class="pli-title">Pine Script — Détection FVG/ICT sur TradingView</span></div>
+          <span class="pli-cat">Indicateur technique</span><span class="pli-arrow">→</span>
+        </div>
+        <div class="project-list-item" onclick="navigate('projet-socio')">
+          <div class="pli-left"><span class="pli-num">04</span><span class="pli-title">Enquête sociologique — Hiérarchies scolaires</span></div>
+          <span class="pli-cat">Recherche académique</span><span class="pli-arrow">→</span>
+        </div>
+      </div>
+
+      <!-- PROJET: Or -->
+      <div class="page-view" id="view-projet-gold">
+        <a class="back-link" onclick="navigate('projets')"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Retour aux projets</a>
+        <div class="section__header"><span class="section__number">III.i</span><h2 class="section__title">Déterminants du prix de l'or</h2></div>
+        <div class="section__body">
+          <p>Cette étude économétrique explore les facteurs macroéconomiques influençant le cours du XAUUSD sur données historiques. Le modèle OLS intègre les taux réels américains, le Dollar Index, la volatilité implicite et les flux d'investissement vers les ETF adossés à l'or. L'analyse est conduite sous GRETL avec tests de robustesse et diagnostics d'hétéroscédasticité.</p>
+          <p>Le document complet présente la revue de littérature, la spécification du modèle, les résultats et leurs implications.</p>
+        </div>
+        <div class="download-block">
+          <a href="#" class="download-btn"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Télécharger l'étude</a>
+          <span class="download-meta">PDF — Étude complète</span>
+        </div>
+      </div>
+
+      <!-- PROJET: Scanner -->
+      <div class="page-view" id="view-projet-scanner">
+        <a class="back-link" onclick="navigate('projets')"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Retour aux projets</a>
+        <div class="section__header"><span class="section__number">III.ii</span><h2 class="section__title">Gold Scanner</h2></div>
+        <div class="section__body">
+          <p>Scanner multi-timeframe développé en Python pour l'analyse du XAUUSD selon la méthodologie SMC/ICT. L'architecture modulaire comprend douze composants couvrant la détection de structure de marché, le scoring de confluence, la validation de déplacement et les alertes en temps réel via Telegram.</p>
+          <p>La documentation technique détaille l'architecture, les choix de conception et le système de scoring.</p>
+        </div>
+        <div class="download-block">
+          <a href="#" class="download-btn"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Télécharger la documentation</a>
+          <span class="download-meta">PDF — Documentation technique</span>
+        </div>
+      </div>
+
+      <!-- PROJET: Pine Script -->
+      <div class="page-view" id="view-projet-pine">
+        <a class="back-link" onclick="navigate('projets')"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Retour aux projets</a>
+        <div class="section__header"><span class="section__number">III.iii</span><h2 class="section__title">Pine Script — FVG/ICT</h2></div>
+        <div class="section__body">
+          <p>Indicateur personnalisé développé en Pine Script sur TradingView pour la détection automatique de signaux ICT sur les timeframes M1 et M5. Le système repose sur un scoring de confluence à quatre points intégrant le biais HTF, le contexte BOS/sweep, la zone premium/discount et la qualité du déplacement.</p>
+          <p>La note technique détaille la logique de filtrage, les paramètres de calibration et les résultats en conditions réelles.</p>
+        </div>
+        <div class="download-block">
+          <a href="#" class="download-btn"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Télécharger la note</a>
+          <span class="download-meta">PDF — Note technique</span>
+        </div>
+      </div>
+
+      <!-- PROJET: Sociologie -->
+      <div class="page-view" id="view-projet-socio">
+        <a class="back-link" onclick="navigate('projets')"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Retour aux projets</a>
+        <div class="section__header"><span class="section__number">III.iv</span><h2 class="section__title">Enquête sociologique</h2></div>
+        <div class="section__body">
+          <p>Étude de terrain sur la reproduction des hiérarchies académiques, conduite par entretiens semi-directifs et analyse thématique. Ce travail interroge les mécanismes de distinction et de classement au sein de l'institution scolaire.</p>
+          <p>Le rapport complet, incluant méthodologie, retranscriptions et analyse, est disponible ci-dessous.</p>
+        </div>
+        <div class="download-block">
+          <a href="docs/Memoire_Classements_scolaires_et_popularite.pdf" download class="download-btn"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Télécharger le rapport</a>
+          <span class="download-meta">PDF — Rapport d'enquête</span>
+        </div>
+      </div>
+
+      <!-- JOURNAL DE TRADING -->
+      <div class="page-view" id="view-journal">
+        <div class="section__header">
+          <span class="section__number">IV</span>
+          <h2 class="section__title">Journal de Trading</h2>
+        </div>
+        <div class="section__body">
+          <p>Suivi méthodique des positions sur le XAUUSD selon la méthodologie SMC/ICT. Chaque entrée documente le biais HTF, le score de confluence, le point d'entrée, la gestion du risque et le résultat. Opérations exclusivement durant les killzones London et New York, risque plafonné à 1% du capital par position.</p>
+          <p>La stratégie repose sur un workflow en trois phases : narration du biais sur les timeframes supérieurs, scoring de confluence avec seuil minimum de 3/5, puis exécution sur les timeframes inférieurs avec stop-loss tamponné et gestion fractionnée des sorties.</p>
+          <p>Le journal complet est téléchargeable ci-dessous.</p>
+        </div>
+        <div class="download-block">
+          <a href="#" class="download-btn"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Télécharger le journal</a>
+          <span class="download-meta">PDF — Journal complet</span>
+        </div>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="page-view" id="view-contact">
+        <div class="section__header">
+          <span class="section__number">V</span>
+          <h2 class="section__title">Contact</h2>
+        </div>
+        <div class="section__body">
+          <p>Pour toute question relative à mes travaux, une collaboration ou une opportunité professionnelle, je suis joignable par courriel à l'adresse <strong>adam.boumbar@dauphine.eu</strong> ou via mon profil <strong>LinkedIn</strong>.</p>
+          <p>Je suis actuellement à la recherche d'un stage en finance de marché, audit ou conseil en stratégie pour l'été 2026.</p>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__left">Adam Boumbar — Paris, MMXXVI</div>
+    <div class="footer__right">Tous droits réservés</div>
+  </footer>
+
+</div>
+
+<script>
+  const navLinks = document.querySelectorAll('.sidebar__nav > li > a[data-page]');
+  const subnavLinks = document.querySelectorAll('.sidebar__subnav a[data-page]');
+  const subnav = document.getElementById('subnav-projets');
+  const allViews = document.querySelectorAll('.page-view');
+
+  function navigate(pageId) {
+    allViews.forEach(v => v.classList.remove('active'));
+    const target = document.getElementById('view-' + pageId);
+    if (target) target.classList.add('active');
+
+    navLinks.forEach(l => l.classList.remove('active'));
+    subnavLinks.forEach(l => l.classList.remove('active'));
+
+    const isProjectSub = pageId.startsWith('projet-');
+    const parentPage = isProjectSub ? 'projets' : pageId;
+
+    navLinks.forEach(l => { if (l.dataset.page === parentPage) l.classList.add('active'); });
+    if (isProjectSub) subnavLinks.forEach(l => { if (l.dataset.page === pageId) l.classList.add('active'); });
+
+    subnav.classList.toggle('open', parentPage === 'projets' || isProjectSub);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
